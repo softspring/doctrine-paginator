@@ -7,7 +7,7 @@
     "prefer-stable": true,
     "require": {
         "php": ">=7.4",
-        "doctrine/orm": ">2.11.3",
+        "doctrine/orm": "^2.11",
         "softspring/doctrine-query-filters": "^5.0",
         "symfony/http-foundation": "^5.4",
         "symfony/form": "^5.4",
