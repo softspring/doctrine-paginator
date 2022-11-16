@@ -2,7 +2,6 @@
 
 namespace Softspring\Component\DoctrinePaginator\Collection;
 
-use Closure;
 use Doctrine\Common\Collections\Collection;
 use Softspring\Component\DoctrinePaginator\Utils\Collapser;
 use Symfony\Component\HttpFoundation\Request;
@@ -95,7 +94,7 @@ class PaginatedCollection implements Collection
 
     public function isFirstPage(): bool
     {
-        return $this->getPage() === 1;
+        return 1 === $this->getPage();
     }
 
     public function isLastPage(): bool
@@ -142,7 +141,7 @@ class PaginatedCollection implements Collection
         $query[$sortParameterName] = $sortDirection;
         $query[$pageParameterName] = 1;
 
-        return $url . '?' . http_build_query($query);
+        return $url.'?'.http_build_query($query);
     }
 
     /* ****************************************************************************
@@ -174,12 +173,12 @@ class PaginatedCollection implements Collection
         return $this->originalCollection->set($key, $value);
     }
 
-    public function filter(Closure $p): Collection
+    public function filter(\Closure $p): Collection
     {
         return $this->originalCollection->filter($p);
     }
 
-    public function partition(Closure $p): array
+    public function partition(\Closure $p): array
     {
         return $this->originalCollection->partition($p);
     }
@@ -279,17 +278,17 @@ class PaginatedCollection implements Collection
         return $this->originalCollection->slice($offset, $length);
     }
 
-    public function exists(Closure $p): bool
+    public function exists(\Closure $p): bool
     {
         return $this->originalCollection->exists($p);
     }
 
-    public function map(Closure $func): Collection
+    public function map(\Closure $func): Collection
     {
         return $this->originalCollection->map($func);
     }
 
-    public function forAll(Closure $p): bool
+    public function forAll(\Closure $p): bool
     {
         return $this->originalCollection->forAll($p);
     }

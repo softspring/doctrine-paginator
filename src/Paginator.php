@@ -46,7 +46,7 @@ class Paginator
         $cloneQb = clone $qb;
         Filters::apply($cloneQb, $filters);
         $cloneQb->select('COUNT('.$cloneQb->getAllAliases()[0].')');
-        $total = (int)$cloneQb->getQuery()->getSingleScalarResult();
+        $total = (int) $cloneQb->getQuery()->getSingleScalarResult();
 
         if ($total) {
             $qb->setFirstResult(($page - 1) * $rpp);
@@ -56,6 +56,6 @@ class Paginator
             $result = $qb->getQuery()->getResult();
         }
 
-        return new PaginatedCollection(new ArrayCollection($result??[]), $page, $rpp, $total, $orderBy);
+        return new PaginatedCollection(new ArrayCollection($result ?? []), $page, $rpp, $total, $orderBy);
     }
 }
