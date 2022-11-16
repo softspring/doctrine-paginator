@@ -56,6 +56,6 @@ class Paginator
             $result = $qb->getQuery()->getResult();
         }
 
-        return new PaginatedCollection(new ArrayCollection($result??[]), $page, $rpp, $total);
+        return new PaginatedCollection(new ArrayCollection($result??[]), $page, $rpp, $total, $orderBy);
     }
 }

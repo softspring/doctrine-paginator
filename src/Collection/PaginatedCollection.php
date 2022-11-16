@@ -5,6 +5,8 @@ namespace Softspring\Component\DoctrinePaginator\Collection;
 use Closure;
 use Doctrine\Common\Collections\Collection;
 use Softspring\Component\DoctrinePaginator\Utils\Collapser;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class PaginatedCollection implements Collection
 {
@@ -16,12 +18,15 @@ class PaginatedCollection implements Collection
 
     protected ?int $total;
 
-    public function __construct(Collection $originalCollection, ?int $page = null, ?int $rpp = 10, ?int $total = null)
+    protected ?array $orderBy;
+
+    public function __construct(Collection $originalCollection, ?int $page = null, ?int $rpp = 10, ?int $total = null, ?array $orderBy = null)
     {
         $this->originalCollection = $originalCollection;
         $this->page = $page;
         $this->rpp = $rpp;
         $this->total = $total;
+        $this->orderBy = $orderBy;
     }
 
     public function getPage(): ?int
@@ -101,6 +106,43 @@ class PaginatedCollection implements Collection
     public function collapsedPages(int $elements = 5, bool $alwaysIncludeFirstAndLast = false): array
     {
         return Collapser::collapse($this, $elements, $alwaysIncludeFirstAndLast);
+    }
+
+    /* ****************************************************************************
+     * UTIL METHODS
+     * **************************************************************************** */
+
+    public function isSortedBy(string $orderField, ?string $sortDirection = null): bool
+    {
+        return $this->isOrderedBy($orderField) && $this->orderBy[$orderField] == $sortDirection;
+    }
+
+    public function isOrderedBy(string $orderField): bool
+    {
+        return isset($this->orderBy[$orderField]);
+    }
+
+    public function getSortToggleUrl(Request $request, string $orderField, string $orderParameterName = 'order', string $sortParameterName = 'sort', string $pageParameterName = 'page', int $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH): string
+    {
+        if ($this->isOrderedBy($orderField)) {
+            $inverseOrder = $this->isSortedBy($orderField, 'asc') ? 'desc' : 'asc';
+
+            return $this->getSortUrl($request, $orderField, $inverseOrder, $orderParameterName, $sortParameterName, $pageParameterName, $referenceType);
+        } else {
+            return $this->getSortUrl($request, $orderField, 'asc', $orderParameterName, $sortParameterName, $pageParameterName, $referenceType);
+        }
+    }
+
+    public function getSortUrl(Request $request, string $orderField, string $sortDirection, string $orderParameterName = 'order', string $sortParameterName = 'sort', string $pageParameterName = 'page', int $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH): string
+    {
+        $url = $request->getPathInfo();
+        $query = $request->query->all();
+
+        $query[$orderParameterName] = $orderField;
+        $query[$sortParameterName] = $sortDirection;
+        $query[$pageParameterName] = 1;
+
+        return $url . '?' . http_build_query($query);
     }
 
     /* ****************************************************************************
