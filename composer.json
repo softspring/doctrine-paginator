@@ -8,7 +8,6 @@
     "require": {
         "php": ">=8.0",
         "doctrine/orm": "^2.11",
-        "doctrine/collections": "^2.0",
         "softspring/doctrine-query-filters": "^5.0",
         "symfony/http-foundation": "^5.4|^6.0",
         "symfony/form": "^5.4|^6.0",
@@ -16,6 +15,7 @@
         "symfony/routing": "^5.4|^6.0"
     },
     "require-dev": {
+        "doctrine/collections": "^2.0",
         "friendsofphp/php-cs-fixer": "9999999-dev",
         "phpstan/phpstan": "^1.9",
         "phpunit/phpunit": "^9.5"
