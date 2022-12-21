@@ -31,7 +31,7 @@ class Paginator
 //        $rpp = $paginatorForm::getRpp($request);
 //        $orderBy = $paginatorForm::getOrder($request);
 //
-//        self::queryPage($qb, $page, $rpp, $orderBy);
+        return self::queryPage($qb, 1, 100, []); // TODO make this work
     }
 
     /**

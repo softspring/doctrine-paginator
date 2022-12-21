@@ -3,6 +3,7 @@
 namespace Softspring\Component\DoctrinePaginator\Collection;
 
 use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ReadableCollection;
 use Softspring\Component\DoctrinePaginator\Utils\Collapser;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -53,7 +54,7 @@ class PaginatedCollection implements Collection
             return 0;
         }
 
-        return ceil($this->total / $this->rpp);
+        return (int) ceil($this->total / $this->rpp);
     }
 
     public function getFirstPage(): ?int
@@ -150,17 +151,17 @@ class PaginatedCollection implements Collection
 
     public function add($element)
     {
-        return $this->originalCollection->add($element);
+        $this->originalCollection->add($element);
     }
 
     public function clear()
     {
-        return $this->originalCollection->clear();
+        $this->originalCollection->clear();
     }
 
     public function remove($key)
     {
-        return $this->originalCollection->remove($key);
+        $this->originalCollection->remove($key);
     }
 
     public function removeElement($element): bool
@@ -170,10 +171,10 @@ class PaginatedCollection implements Collection
 
     public function set($key, $value)
     {
-        return $this->originalCollection->set($key, $value);
+        $this->originalCollection->set($key, $value);
     }
 
-    public function filter(\Closure $p): Collection
+    public function filter(\Closure $p): ReadableCollection
     {
         return $this->originalCollection->filter($p);
     }
@@ -183,7 +184,7 @@ class PaginatedCollection implements Collection
         return $this->originalCollection->partition($p);
     }
 
-    public function getIterator()
+    public function getIterator(): \Traversable
     {
         return $this->originalCollection->getIterator();
     }
@@ -193,19 +194,19 @@ class PaginatedCollection implements Collection
         return $this->originalCollection->offsetExists($offset);
     }
 
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
         return $this->originalCollection->offsetGet($offset);
     }
 
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
-        return $this->originalCollection->offsetSet($offset, $value);
+        $this->originalCollection->offsetSet($offset, $value);
     }
 
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
-        return $this->originalCollection->offsetUnset($offset);
+        $this->originalCollection->offsetUnset($offset);
     }
 
     public function count(): int
@@ -283,7 +284,7 @@ class PaginatedCollection implements Collection
         return $this->originalCollection->exists($p);
     }
 
-    public function map(\Closure $func): Collection
+    public function map(\Closure $func): ReadableCollection
     {
         return $this->originalCollection->map($func);
     }
@@ -296,5 +297,15 @@ class PaginatedCollection implements Collection
     public function indexOf($element)
     {
         return $this->originalCollection->indexOf($element);
+    }
+
+    public function findFirst(\Closure $p)
+    {
+        return $this->originalCollection->findFirst($p);
+    }
+
+    public function reduce(\Closure $func, mixed $initial = null)
+    {
+        return $this->originalCollection->reduce($func, $initial);
     }
 }

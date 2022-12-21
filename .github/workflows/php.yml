@@ -15,6 +15,8 @@ env:
 jobs:
     build:
         runs-on: ubuntu-latest
+#        permissions:
+#            contents: write
         strategy:
             matrix:
                 php-versions: [ '8.0', '8.1' ]
@@ -52,4 +54,14 @@ jobs:
               run: ./vendor/bin/php-cs-fixer fix -v --diff --dry-run
 
 #            - name: Run tests
-#              run: ./vendor/bin/phpunit --coverage-text
+#              run: ./vendor/bin/phpunit --coverage-text --coverage-html=.phpunit.cache/html-report
+
+            - name: Run phpstan
+              run: ./vendor/bin/phpstan analyse
+
+#            - name: phpunit-coverage-badge
+#              uses: timkrase/phpunit-coverage-badge@v1.2.0
+#              with:
+#                  push_badge: true
+#                  coverage_badge_path: .github/badges/coverage.svg
+#                  repo_token: ${{ secrets.GITHUB_TOKEN }}

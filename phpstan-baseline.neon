@@ -1,0 +1,10 @@
+# parameters:
+# 	ignoreErrors:
+# 		-
+# 			message: "#^Parameter \\#1 \\$data of class Softspring\\\\Component\\\\Events\\\\ViewEvent constructor expects array|ArrayObject, stdClass given.$#"
+# 			count: 1
+# 			path: tests/ViewEventTest.php
+# 		-
+# 			message: "#^Result of && is always false.$#"
+# 			count: 1
+# 			path: src/ViewEvent.php
