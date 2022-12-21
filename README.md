@@ -1,12 +1,12 @@
 # Doctrine paginator component
 
-[![Latest Stable Version](https://poser.pugx.org/softspring/events/v/stable.svg)](https://packagist.org/packages/softspring/events)
-[![Latest Unstable Version](https://poser.pugx.org/softspring/events/v/unstable.svg)](https://packagist.org/packages/softspring/events)
-[![License](https://poser.pugx.org/softspring/events/license.svg)](https://packagist.org/packages/softspring/events)
-[![PHP Version Require](http://poser.pugx.org/softspring/events/require/php)](https://packagist.org/packages/softspring/events)
-[![Total Downloads](https://poser.pugx.org/softspring/events/downloads)](https://packagist.org/packages/softspring/events)
-[![Build status](https://github.com/softspring/events/actions/workflows/php.yml/badge.svg?branch=5.0)](https://github.com/softspring/events/actions/workflows/php.yml)
-![Coverage](https://raw.githubusercontent.com/softspring/events/5.0/.github/badges/coverage.svg)
+[![Latest Stable Version](https://poser.pugx.org/softspring/doctrine-paginator/v/stable.svg)](https://packagist.org/packages/softspring/doctrine-paginator)
+[![Latest Unstable Version](https://poser.pugx.org/softspring/doctrine-paginator/v/unstable.svg)](https://packagist.org/packages/softspring/doctrine-paginator)
+[![License](https://poser.pugx.org/softspring/doctrine-paginator/license.svg)](https://packagist.org/packages/softspring/doctrine-paginator)
+[![PHP Version Require](http://poser.pugx.org/softspring/doctrine-paginator/require/php)](https://packagist.org/packages/softspring/doctrine-paginator)
+[![Total Downloads](https://poser.pugx.org/softspring/doctrine-paginator/downloads)](https://packagist.org/packages/softspring/doctrine-paginator)
+[![Build status](https://github.com/softspring/doctrine-paginator/actions/workflows/php.yml/badge.svg?branch=5.0)](https://github.com/softspring/doctrine-paginator/actions/workflows/php.yml)
+![Coverage](https://raw.githubusercontent.com/softspring/doctrine-paginator/5.0/.github/badges/coverage.svg)
 
 Provides a simple powerful doctrine paginator.
 
