@@ -299,13 +299,27 @@ class PaginatedCollection implements Collection
         return $this->originalCollection->indexOf($element);
     }
 
+    /**
+     * @throws \Exception
+     */
     public function findFirst(\Closure $p)
     {
+        if (!method_exists(ReadableCollection::class, 'findFirst')) {
+            throw new \Exception('This findFirst method is only available with doctrine/collections >= 2.0, witch is only compatible with PHP >= 8.1');
+        }
+
         return $this->originalCollection->findFirst($p);
     }
 
+    /**
+     * @throws \Exception
+     */
     public function reduce(\Closure $func, mixed $initial = null)
     {
+        if (!method_exists(ReadableCollection::class, 'reduce')) {
+            throw new \Exception('This reduce method is only available with doctrine/collections >= 2.0, witch is only compatible with PHP >= 8.1');
+        }
+
         return $this->originalCollection->reduce($func, $initial);
     }
 }
