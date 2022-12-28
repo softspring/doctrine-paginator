@@ -29,5 +29,8 @@
         "psr-4": {
             "Softspring\\Component\\DoctrinePaginator\\Tests\\": "tests/"
         }
+    },
+    "config": {
+        "sort-packages": true
     }
 }
