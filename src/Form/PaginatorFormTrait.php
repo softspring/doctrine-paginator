@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraints\Choice;
 
 trait PaginatorFormTrait
 {
-    public function paginatorConfigureOptions(OptionsResolver $resolver)
+    public function paginatorConfigureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'page_field_name' => 'page',
@@ -38,7 +38,7 @@ trait PaginatorFormTrait
         });
     }
 
-    public function paginatorBuildForm(FormBuilderInterface $builder, array $options)
+    public function paginatorBuildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add($options['rpp_field_name'], HiddenType::class, [
             'mapped' => false,

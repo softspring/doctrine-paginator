@@ -7,33 +7,12 @@ use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\QueryBuilder;
 use Softspring\Component\DoctrinePaginator\Collection\PaginatedCollection;
-use Softspring\Component\DoctrinePaginator\Form\PaginatorFormInterface;
 use Softspring\Component\DoctrineQueryFilters\Exception\InvalidFilterValueException;
 use Softspring\Component\DoctrineQueryFilters\Exception\MissingFromInQueryBuilderException;
-use Softspring\Component\DoctrineQueryFilters\FilterFormInterface;
 use Softspring\Component\DoctrineQueryFilters\Filters;
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\HttpFoundation\Request;
 
 class Paginator
 {
-    public static function queryForm(QueryBuilder $qb, FormInterface $form, Request $request): PaginatedCollection
-    {
-//        $reflectionClass = new \ReflectionClass($form->getConfig()->getType());
-//        if ($reflectionClass->implementsInterface(FilterFormInterface::class)) {
-//            Filters::applyForm($qb, $form, $request);
-//        }
-//
-//        /** @var PaginatorFormInterface $paginatorForm */
-//        $paginatorForm = $form->getConfig()->getType();
-//
-//        $page = $paginatorForm::getPage($request);
-//        $rpp = $paginatorForm::getRpp($request);
-//        $orderBy = $paginatorForm::getOrder($request);
-//
-        return self::queryPage($qb, 1, 100, []); // TODO make this work
-    }
-
     /**
      * @throws NoResultException
      * @throws NonUniqueResultException
