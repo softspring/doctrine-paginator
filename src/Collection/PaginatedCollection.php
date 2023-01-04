@@ -10,36 +10,36 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class PaginatedCollection implements Collection
 {
-    protected Collection $originalCollection;
+    protected Collection $results;
 
-    protected ?int $page;
+    protected int $page;
 
-    protected ?int $rpp;
+    protected int $rpp;
 
-    protected ?int $total;
+    protected int $total;
 
     protected ?array $orderBy;
 
-    public function __construct(Collection $originalCollection, ?int $page = null, ?int $rpp = 10, ?int $total = null, ?array $orderBy = null)
+    public function __construct(Collection $results, int $page, int $rpp, int $total, ?array $orderBy = null)
     {
-        $this->originalCollection = $originalCollection;
+        $this->results = $results;
         $this->page = $page;
         $this->rpp = $rpp;
         $this->total = $total;
         $this->orderBy = $orderBy;
     }
 
-    public function getPage(): ?int
+    public function getPage(): int
     {
         return $this->page;
     }
 
-    public function getRpp(): ?int
+    public function getRpp(): int
     {
         return $this->rpp;
     }
 
-    public function getTotal(): ?int
+    public function getTotal(): int
     {
         return $this->total;
     }
@@ -145,158 +145,187 @@ class PaginatedCollection implements Collection
         return $url.'?'.http_build_query($query);
     }
 
+    public function getPageUrl(Request $request, int $page, string $pageParameterName = 'page', int $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH): string
+    {
+        $url = $request->getPathInfo();
+        $query = $request->query->all();
+        $query[$pageParameterName] = $page;
+
+        return $url.'?'.http_build_query($query);
+    }
+
+    public function getFirstPageUrl(Request $request, string $pageParameterName = 'page', int $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH): ?string
+    {
+        return $this->getFirstPage() ? $this->getPageUrl($request, $this->getFirstPage(), $pageParameterName, $referenceType) : null;
+    }
+
+    public function getLastPageUrl(Request $request, string $pageParameterName = 'page', int $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH): ?string
+    {
+        return $this->getLastPage() ? $this->getPageUrl($request, $this->getLastPage(), $pageParameterName, $referenceType) : null;
+    }
+
+    public function getNextPageUrl(Request $request, string $pageParameterName = 'page', int $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH): ?string
+    {
+        return $this->getNextPage() ? $this->getPageUrl($request, $this->getNextPage(), $pageParameterName, $referenceType) : null;
+    }
+
+    public function getPrevPageUrl(Request $request, string $pageParameterName = 'page', int $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH): ?string
+    {
+        return $this->getPrevPage() ? $this->getPageUrl($request, $this->getPrevPage(), $pageParameterName, $referenceType) : null;
+    }
+
     /* ****************************************************************************
      * IMPLEMENT DECORATED METHODS
      * **************************************************************************** */
 
     public function add($element)
     {
-        $this->originalCollection->add($element);
+        $this->results->add($element);
     }
 
     public function clear()
     {
-        $this->originalCollection->clear();
+        $this->results->clear();
     }
 
     public function remove($key)
     {
-        $this->originalCollection->remove($key);
+        $this->results->remove($key);
     }
 
     public function removeElement($element): bool
     {
-        return $this->originalCollection->removeElement($element);
+        return $this->results->removeElement($element);
     }
 
     public function set($key, $value)
     {
-        $this->originalCollection->set($key, $value);
+        $this->results->set($key, $value);
     }
 
     public function filter(\Closure $p): ReadableCollection
     {
-        return $this->originalCollection->filter($p);
+        return $this->results->filter($p);
     }
 
     public function partition(\Closure $p): array
     {
-        return $this->originalCollection->partition($p);
+        return $this->results->partition($p);
     }
 
     public function getIterator(): \Traversable
     {
-        return $this->originalCollection->getIterator();
+        return $this->results->getIterator();
     }
 
     public function offsetExists($offset): bool
     {
-        return $this->originalCollection->offsetExists($offset);
+        return $this->results->offsetExists($offset);
     }
 
     public function offsetGet($offset): mixed
     {
-        return $this->originalCollection->offsetGet($offset);
+        return $this->results->offsetGet($offset);
     }
 
     public function offsetSet($offset, $value): void
     {
-        $this->originalCollection->offsetSet($offset, $value);
+        $this->results->offsetSet($offset, $value);
     }
 
     public function offsetUnset($offset): void
     {
-        $this->originalCollection->offsetUnset($offset);
+        $this->results->offsetUnset($offset);
     }
 
     public function count(): int
     {
-        return $this->originalCollection->count();
+        return $this->results->count();
     }
 
     public function contains($element): bool
     {
-        return $this->originalCollection->contains($element);
+        return $this->results->contains($element);
     }
 
     public function isEmpty(): bool
     {
-        return $this->originalCollection->isEmpty();
+        return $this->results->isEmpty();
     }
 
     public function containsKey($key): bool
     {
-        return $this->originalCollection->containsKey($key);
+        return $this->results->containsKey($key);
     }
 
     public function get($key)
     {
-        return $this->originalCollection->get($key);
+        return $this->results->get($key);
     }
 
     public function getKeys(): array
     {
-        return $this->originalCollection->getKeys();
+        return $this->results->getKeys();
     }
 
     public function getValues(): array
     {
-        return $this->originalCollection->getValues();
+        return $this->results->getValues();
     }
 
     public function toArray(): array
     {
-        return $this->originalCollection->toArray();
+        return $this->results->toArray();
     }
 
     public function first()
     {
-        return $this->originalCollection->first();
+        return $this->results->first();
     }
 
     public function last()
     {
-        return $this->originalCollection->last();
+        return $this->results->last();
     }
 
     public function key()
     {
-        return $this->originalCollection->key();
+        return $this->results->key();
     }
 
     public function current()
     {
-        return $this->originalCollection->current();
+        return $this->results->current();
     }
 
     public function next()
     {
-        return $this->originalCollection->next();
+        return $this->results->next();
     }
 
     public function slice($offset, $length = null): array
     {
-        return $this->originalCollection->slice($offset, $length);
+        return $this->results->slice($offset, $length);
     }
 
     public function exists(\Closure $p): bool
     {
-        return $this->originalCollection->exists($p);
+        return $this->results->exists($p);
     }
 
     public function map(\Closure $func): ReadableCollection
     {
-        return $this->originalCollection->map($func);
+        return $this->results->map($func);
     }
 
     public function forAll(\Closure $p): bool
     {
-        return $this->originalCollection->forAll($p);
+        return $this->results->forAll($p);
     }
 
     public function indexOf($element)
     {
-        return $this->originalCollection->indexOf($element);
+        return $this->results->indexOf($element);
     }
 
     /**
@@ -308,7 +337,7 @@ class PaginatedCollection implements Collection
             throw new \Exception('This findFirst method is only available with doctrine/collections >= 2.0, witch is only compatible with PHP >= 8.1');
         }
 
-        return $this->originalCollection->findFirst($p);
+        return $this->results->findFirst($p);
     }
 
     /**
@@ -320,6 +349,6 @@ class PaginatedCollection implements Collection
             throw new \Exception('This reduce method is only available with doctrine/collections >= 2.0, witch is only compatible with PHP >= 8.1');
         }
 
-        return $this->originalCollection->reduce($func, $initial);
+        return $this->results->reduce($func, $initial);
     }
 }

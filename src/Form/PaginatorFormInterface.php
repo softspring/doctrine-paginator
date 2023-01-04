@@ -2,8 +2,8 @@
 
 namespace Softspring\Component\DoctrinePaginator\Form;
 
-use Symfony\Component\Form\FormTypeInterface;
+use Softspring\Component\DoctrineQueryFilters\FilterFormInterface;
 
-interface PaginatorFormInterface extends FormTypeInterface
+interface PaginatorFormInterface extends FilterFormInterface
 {
 }
