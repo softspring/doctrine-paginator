@@ -1,0 +1,17 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Method Softspring\\\\Component\\\\DoctrinePaginator\\\\Collection\\\\PaginatedCollection::add\\(\\) should return true but return statement is missing.$#"
+			count: 1
+			path: src/Collection/PaginatedCollection.php
+			reportUnmatched: false
+		-
+			message: "#^Call to an undefined method Doctrine\\\\Common\\\\Collections\\\\Collection::findFirst\\(\\).$#"
+			count: 1
+			path: src/Collection/PaginatedCollection.php
+			reportUnmatched: false
+		-
+			message: "#^Call to an undefined method Doctrine\\\\Common\\\\Collections\\\\Collection::reduce\\(\\).$#"
+			count: 1
+			path: src/Collection/PaginatedCollection.php
+			reportUnmatched: false
