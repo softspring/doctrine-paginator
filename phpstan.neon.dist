@@ -9,4 +9,9 @@ parameters:
     bootstrapFiles:
         - vendor/autoload.php
     ignoreErrors:
-        - "#Conditional return type uses subject type TMaybeContained which is not part of PHPDoc @template tags#"
+        -
+            message: "#Conditional return type uses subject type TMaybeContained which is not part of PHPDoc @template tags#"
+			reportUnmatched: false
+        -
+            message: "#Condition \"TMaybeContained is mixed\" in conditional return type is always true.#"
+			reportUnmatched: false
