@@ -20,7 +20,7 @@ class PaginatedCollection implements Collection
 
     protected ?array $orderBy;
 
-    public function __construct(Collection $results, int $page, int $rpp, int $total, ?array $orderBy = null)
+    public function __construct(Collection $results, int $page, int $rpp, int $total, array $orderBy = null)
     {
         $this->results = $results;
         $this->page = $page;
@@ -112,7 +112,7 @@ class PaginatedCollection implements Collection
      * UTIL METHODS
      * **************************************************************************** */
 
-    public function isSortedBy(string $orderField, ?string $sortDirection = null): bool
+    public function isSortedBy(string $orderField, string $sortDirection = null): bool
     {
         return $this->isOrderedBy($orderField) && $this->orderBy[$orderField] == $sortDirection;
     }
