@@ -11,7 +11,7 @@ parameters:
     ignoreErrors:
         -
             message: "#Conditional return type uses subject type TMaybeContained which is not part of PHPDoc @template tags#"
-			reportUnmatched: false
+            reportUnmatched: false
         -
             message: "#Condition \"TMaybeContained is mixed\" in conditional return type is always true.#"
-			reportUnmatched: false
+            reportUnmatched: false
