@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints\Choice;
 
 class PaginatorForm extends FiltersForm implements PaginatorFormInterface
 {
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         parent::configureOptions($resolver);
 
@@ -41,7 +41,7 @@ class PaginatorForm extends FiltersForm implements PaginatorFormInterface
         });
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         parent::buildForm($builder, $options);
 
