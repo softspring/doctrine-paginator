@@ -5,8 +5,8 @@
 [![License](https://poser.pugx.org/softspring/doctrine-paginator/license.svg)](https://packagist.org/packages/softspring/doctrine-paginator)
 [![PHP Version Require](http://poser.pugx.org/softspring/doctrine-paginator/require/php)](https://packagist.org/packages/softspring/doctrine-paginator)
 [![Total Downloads](https://poser.pugx.org/softspring/doctrine-paginator/downloads)](https://packagist.org/packages/softspring/doctrine-paginator)
-[![Build status](https://github.com/softspring/doctrine-paginator/actions/workflows/php.yml/badge.svg?branch=5.1)](https://github.com/softspring/doctrine-paginator/actions/workflows/php.yml)
-![Coverage](https://raw.githubusercontent.com/softspring/doctrine-paginator/5.1/.github/badges/coverage.svg)
+[![Build status](https://github.com/softspring/doctrine-paginator/actions/workflows/php.yml/badge.svg?branch=5.2)](https://github.com/softspring/doctrine-paginator/actions/workflows/php.yml)
+![Coverage](https://raw.githubusercontent.com/softspring/doctrine-paginator/5.2/.github/badges/coverage.svg)
 
 Provides a simple powerful doctrine paginator.
 
