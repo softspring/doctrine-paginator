@@ -4,16 +4,16 @@
     "type": "library",
     "license": "MIT",
     "minimum-stability": "dev",
-    "prefer-stable": true,
+    "prefer-stable": false,
     "require": {
         "php": ">=8.0",
-        "doctrine/orm": "^2.11",
+        "doctrine/orm": "^2.11|^2.17@dev",
         "doctrine/collections": "^1.8 | ^2.0",
         "softspring/doctrine-query-filters": "^5.1",
-        "symfony/http-foundation": "^5.4|^6.0",
-        "symfony/form": "^5.4|^6.0",
-        "symfony/validator": "^5.4|^6.0",
-        "symfony/routing": "^5.4|^6.0"
+        "symfony/http-foundation": "^5.4|^6.0|^7.0@dev",
+        "symfony/form": "^5.4|^6.0|^7.0@dev",
+        "symfony/validator": "^5.4|^6.0|^7.0@dev",
+        "symfony/routing": "^5.4|^6.0|^7.0@dev"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.14",
