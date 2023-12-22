@@ -178,19 +178,19 @@ class PaginatedCollection implements Collection
      * IMPLEMENT DECORATED METHODS
      * **************************************************************************** */
 
-    public function add($element)
+    public function add($element): void
     {
         $this->results->add($element);
     }
 
-    public function clear()
+    public function clear(): void
     {
         $this->results->clear();
     }
 
-    public function remove($key)
+    public function remove($key): mixed
     {
-        $this->results->remove($key);
+        return $this->results->remove($key);
     }
 
     public function removeElement($element): bool
@@ -198,7 +198,7 @@ class PaginatedCollection implements Collection
         return $this->results->removeElement($element);
     }
 
-    public function set($key, $value)
+    public function set($key, $value): void
     {
         $this->results->set($key, $value);
     }
@@ -243,7 +243,7 @@ class PaginatedCollection implements Collection
         return $this->results->count();
     }
 
-    public function contains($element): bool
+    public function contains(mixed $element): bool
     {
         return $this->results->contains($element);
     }
@@ -258,7 +258,7 @@ class PaginatedCollection implements Collection
         return $this->results->containsKey($key);
     }
 
-    public function get($key)
+    public function get($key): mixed
     {
         return $this->results->get($key);
     }
@@ -278,27 +278,27 @@ class PaginatedCollection implements Collection
         return $this->results->toArray();
     }
 
-    public function first()
+    public function first(): mixed
     {
         return $this->results->first();
     }
 
-    public function last()
+    public function last(): mixed
     {
         return $this->results->last();
     }
 
-    public function key()
+    public function key(): int|string|null
     {
         return $this->results->key();
     }
 
-    public function current()
+    public function current(): mixed
     {
         return $this->results->current();
     }
 
-    public function next()
+    public function next(): mixed
     {
         return $this->results->next();
     }
@@ -323,7 +323,7 @@ class PaginatedCollection implements Collection
         return $this->results->forAll($p);
     }
 
-    public function indexOf($element)
+    public function indexOf($element): int|string|bool
     {
         return $this->results->indexOf($element);
     }
@@ -331,7 +331,7 @@ class PaginatedCollection implements Collection
     /**
      * @throws \Exception
      */
-    public function findFirst(\Closure $p)
+    public function findFirst(\Closure $p): mixed
     {
         if (!method_exists(ReadableCollection::class, 'findFirst')) {
             throw new \Exception('This findFirst method is only available with doctrine/collections >= 2.0, witch is only compatible with PHP >= 8.1');
@@ -343,7 +343,7 @@ class PaginatedCollection implements Collection
     /**
      * @throws \Exception
      */
-    public function reduce(\Closure $func, mixed $initial = null)
+    public function reduce(\Closure $func, mixed $initial = null): mixed
     {
         if (!method_exists(ReadableCollection::class, 'reduce')) {
             throw new \Exception('This reduce method is only available with doctrine/collections >= 2.0, witch is only compatible with PHP >= 8.1');
