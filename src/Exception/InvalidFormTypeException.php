@@ -2,6 +2,8 @@
 
 namespace Softspring\Component\DoctrinePaginator\Exception;
 
-class InvalidFormTypeException extends \Exception
+use Exception;
+
+class InvalidFormTypeException extends Exception
 {
 }

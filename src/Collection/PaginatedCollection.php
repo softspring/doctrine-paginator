@@ -2,11 +2,15 @@
 
 namespace Softspring\Component\DoctrinePaginator\Collection;
 
+use Closure;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ReadableCollection;
+use Exception;
+use LogicException;
 use Softspring\Component\DoctrinePaginator\Utils\Collapser;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Traversable;
 
 class PaginatedCollection implements Collection
 {
@@ -47,7 +51,7 @@ class PaginatedCollection implements Collection
     public function getPages(): int
     {
         if (!$this->getRpp()) {
-            throw new \LogicException('Rpp was not set');
+            throw new LogicException('Rpp was not set');
         }
 
         if (!$this->getTotal()) {
@@ -203,17 +207,17 @@ class PaginatedCollection implements Collection
         $this->results->set($key, $value);
     }
 
-    public function filter(\Closure $p): ReadableCollection
+    public function filter(Closure $p): ReadableCollection
     {
         return $this->results->filter($p);
     }
 
-    public function partition(\Closure $p): array
+    public function partition(Closure $p): array
     {
         return $this->results->partition($p);
     }
 
-    public function getIterator(): \Traversable
+    public function getIterator(): Traversable
     {
         return $this->results->getIterator();
     }
@@ -308,17 +312,17 @@ class PaginatedCollection implements Collection
         return $this->results->slice($offset, $length);
     }
 
-    public function exists(\Closure $p): bool
+    public function exists(Closure $p): bool
     {
         return $this->results->exists($p);
     }
 
-    public function map(\Closure $func): ReadableCollection
+    public function map(Closure $func): ReadableCollection
     {
         return $this->results->map($func);
     }
 
-    public function forAll(\Closure $p): bool
+    public function forAll(Closure $p): bool
     {
         return $this->results->forAll($p);
     }
@@ -329,24 +333,24 @@ class PaginatedCollection implements Collection
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
-    public function findFirst(\Closure $p): mixed
+    public function findFirst(Closure $p): mixed
     {
         if (!method_exists(ReadableCollection::class, 'findFirst')) {
-            throw new \Exception('This findFirst method is only available with doctrine/collections >= 2.0, witch is only compatible with PHP >= 8.1');
+            throw new Exception('This findFirst method is only available with doctrine/collections >= 2.0, witch is only compatible with PHP >= 8.1');
         }
 
         return $this->results->findFirst($p);
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
-    public function reduce(\Closure $func, mixed $initial = null): mixed
+    public function reduce(Closure $func, mixed $initial = null): mixed
     {
         if (!method_exists(ReadableCollection::class, 'reduce')) {
-            throw new \Exception('This reduce method is only available with doctrine/collections >= 2.0, witch is only compatible with PHP >= 8.1');
+            throw new Exception('This reduce method is only available with doctrine/collections >= 2.0, witch is only compatible with PHP >= 8.1');
         }
 
         return $this->results->reduce($func, $initial);
