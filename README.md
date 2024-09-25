@@ -1,12 +1,11 @@
 # Doctrine paginator component
 
-[![Latest Stable Version](https://poser.pugx.org/softspring/doctrine-paginator/v/stable.svg)](https://packagist.org/packages/softspring/doctrine-paginator)
-[![Latest Unstable Version](https://poser.pugx.org/softspring/doctrine-paginator/v/unstable.svg)](https://packagist.org/packages/softspring/doctrine-paginator)
-[![License](https://poser.pugx.org/softspring/doctrine-paginator/license.svg)](https://packagist.org/packages/softspring/doctrine-paginator)
-[![PHP Version Require](http://poser.pugx.org/softspring/doctrine-paginator/require/php)](https://packagist.org/packages/softspring/doctrine-paginator)
-[![Total Downloads](https://poser.pugx.org/softspring/doctrine-paginator/downloads)](https://packagist.org/packages/softspring/doctrine-paginator)
-[![Build status](https://github.com/softspring/doctrine-paginator/actions/workflows/php.yml/badge.svg?branch=5.3)](https://github.com/softspring/doctrine-paginator/actions/workflows/php.yml)
-![Coverage](https://raw.githubusercontent.com/softspring/doctrine-paginator/5.3/.github/badges/coverage.svg)
+![Latest Stable](https://img.shields.io/packagist/v/softspring/doctrine-paginator?label=stable&style=flat-square)
+![Latest Unstable](https://img.shields.io/packagist/v/softspring/doctrine-paginator?label=unstable&style=flat-square&include_prereleases)
+![License](https://img.shields.io/packagist/l/softspring/doctrine-paginator?style=flat-square)
+![PHP Version](https://img.shields.io/packagist/dependency-v/softspring/doctrine-paginator/php?style=flat-square)
+![Downloads](https://img.shields.io/packagist/dt/softspring/doctrine-paginator?style=flat-square)
+[![CI](https://img.shields.io/github/actions/workflow/status/softspring/doctrine-paginator/php.yml?branch=5.3&style=flat-square&label=CI)](https://github.com/softspring/doctrine-paginator/actions/workflows/php.yml)
 
 Provides a simple powerful doctrine paginator.
 
