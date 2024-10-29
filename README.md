@@ -5,7 +5,7 @@
 ![License](https://img.shields.io/packagist/l/softspring/doctrine-paginator?style=flat-square)
 ![PHP Version](https://img.shields.io/packagist/dependency-v/softspring/doctrine-paginator/php?style=flat-square)
 ![Downloads](https://img.shields.io/packagist/dt/softspring/doctrine-paginator?style=flat-square)
-[![CI](https://img.shields.io/github/actions/workflow/status/softspring/doctrine-paginator/php.yml?branch=5.3&style=flat-square&label=CI)](https://github.com/softspring/doctrine-paginator/actions/workflows/php.yml)
+[![CI](https://img.shields.io/github/actions/workflow/status/softspring/doctrine-paginator/ci.yml?branch=5.3&style=flat-square&label=CI)](https://github.com/softspring/doctrine-paginator/actions/workflows/ci.yml)
 
 Provides a simple powerful doctrine paginator.
 
