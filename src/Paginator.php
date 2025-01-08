@@ -9,6 +9,7 @@ use Doctrine\ORM\QueryBuilder;
 use Softspring\Component\DoctrinePaginator\Collection\PaginatedCollection;
 use Softspring\Component\DoctrinePaginator\Exception\InvalidFormTypeException;
 use Softspring\Component\DoctrinePaginator\Form\PaginatorFormInterface;
+use Softspring\Component\DoctrinePaginator\Form\QueryBuilderProcessorInterface;
 use Softspring\Component\DoctrineQueryFilters\Exception\InvalidFilterValueException;
 use Softspring\Component\DoctrineQueryFilters\Exception\MissingFromInQueryBuilderException;
 use Softspring\Component\DoctrineQueryFilters\Filters;
@@ -80,6 +81,11 @@ class Paginator
 
         $qb = $formCompiledOptions['query_builder'];
         $filtersMode = $formCompiledOptions['query_builder_mode'];
+
+        $innerForm = $form->getConfig()->getType()->getInnerType();
+        if ($qb instanceof QueryBuilder && $innerForm instanceof QueryBuilderProcessorInterface) {
+            $qb = $innerForm->preProcessQueryBuilder($qb, $filters, $orderSort, $filtersMode);
+        }
 
         return [$qb, $page, $rpp, $filters, $orderSort, $filtersMode];
     }
