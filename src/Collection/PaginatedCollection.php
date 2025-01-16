@@ -182,7 +182,10 @@ class PaginatedCollection implements Collection
      * IMPLEMENT DECORATED METHODS
      * **************************************************************************** */
 
-    public function add($element): void
+    /**
+     * @return void (do not typehint, as it would break the interface for doctrine/collection 1.8)
+     */
+    public function add($element)
     {
         $this->results->add($element);
     }
