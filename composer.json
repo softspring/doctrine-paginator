@@ -2,7 +2,7 @@
     "name": "softspring/doctrine-paginator",
     "description": "This library provides a paginator for doctrine query builder",
     "type": "library",
-    "license": "MIT",
+    "license": "AGPL-3.0",
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
