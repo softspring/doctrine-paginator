@@ -183,7 +183,7 @@ class PaginatedCollection implements Collection
      * **************************************************************************** */
 
     /**
-     * @return void (do not typehint, as it would break the interface for doctrine/collection 1.8)
+     * @return true (do not typehint, as it would break the interface for doctrine/collection 1.8)
      */
     public function add($element)
     {
