@@ -20,6 +20,6 @@ Provides a simple powerful doctrine paginator.
 
 ## License
 
-This bundle is under the MIT license. See the complete license in the bundle [LICENSE](LICENSE) file.
+This package is free and released under the [AGPL-3.0 license](LICENSE).
 
 
