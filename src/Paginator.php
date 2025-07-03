@@ -18,6 +18,25 @@ use Symfony\Component\HttpFoundation\Request;
 
 class Paginator
 {
+    public static function queryAggregate(QueryBuilder $qb, array $aggregates, array $filters = [], int $filtersMode = Filters::MODE_AND): array
+    {
+        $aggregateQb = clone $qb;
+        Filters::apply($aggregateQb, $filters, $filtersMode);
+
+        $aggregateQb->resetDQLPart('select');
+        foreach ($aggregates as $alias => $aggregate) {
+            if (is_string($alias)) {
+                $aggregateQb->addSelect($aggregate.' as '.$alias);
+            } else {
+                $aggregateQb->addSelect($aggregate);
+            }
+        }
+
+        $result = $aggregateQb->getQuery()->getArrayResult();
+
+        return $result[0] ?? [];
+    }
+
     /**
      * @throws NoResultException
      * @throws NonUniqueResultException
@@ -33,11 +52,12 @@ class Paginator
         $total = (int) $countQb->getQuery()->getSingleScalarResult();
 
         if ($total) {
-            $qb->setFirstResult(($page - 1) * $rpp);
-            $qb->setMaxResults($rpp);
-            Filters::apply($qb, $filters, $filtersMode);
-            Filters::sortBy($qb, $orderBy);
-            $result = $qb->getQuery()->getResult();
+            $pageQb = clone $qb;
+            $pageQb->setFirstResult(($page - 1) * $rpp);
+            $pageQb->setMaxResults($rpp);
+            Filters::apply($pageQb, $filters, $filtersMode);
+            Filters::sortBy($pageQb, $orderBy);
+            $result = $pageQb->getQuery()->getResult();
         }
 
         return new PaginatedCollection(new ArrayCollection($result ?? []), $page, $rpp, $total, $orderBy);
