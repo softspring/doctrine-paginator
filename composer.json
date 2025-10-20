@@ -9,7 +9,7 @@
         "php": ">=8.1",
         "doctrine/orm": "^2.11 | ^3.0",
         "doctrine/collections": "^1.8 | ^2.0 | ^3.0",
-        "softspring/doctrine-query-filters": "^5.5@dev",
+        "softspring/doctrine-query-filters": "^6.0@dev",
         "symfony/http-foundation": "^5.4|^6.0|^7.0",
         "symfony/form": "^5.4|^6.0|^7.0",
         "symfony/validator": "^5.4|^6.0|^7.0",
