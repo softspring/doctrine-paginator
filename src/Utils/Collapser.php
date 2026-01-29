@@ -8,7 +8,7 @@ class Collapser
 {
     public static function collapse(PaginatedCollection $collection, int $elements = 5, bool $alwaysIncludeFirstAndLast = false): array
     {
-        $current = (int) $collection->getPage();
+        $current = $collection->getPage();
         $pages = $collection->getPages();
         $pagesArray = range(1, $pages);
 
@@ -43,7 +43,7 @@ class Collapser
             // add null at the beginning
             if ($pagesArray[$elements - 1] != $pages) {
                 array_pop($pagesArray);
-                array_push($pagesArray, $pages);
+                $pagesArray[] = $pages;
 
                 if (isset($pagesArray[$elements - 2]) && $pagesArray[$elements - 2] != $pages - 1) {
                     $pagesArray[$elements - 2] = null;

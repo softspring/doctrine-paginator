@@ -51,7 +51,7 @@ class Paginator
         $countQb->select('COUNT('.$countQb->getAllAliases()[0].')');
         $total = (int) $countQb->getQuery()->getSingleScalarResult();
 
-        if ($total) {
+        if ($total !== 0) {
             $pageQb = clone $qb;
             $pageQb->setFirstResult(($page - 1) * $rpp);
             $pageQb->setMaxResults($rpp);

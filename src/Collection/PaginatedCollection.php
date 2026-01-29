@@ -50,11 +50,11 @@ class PaginatedCollection implements Collection
 
     public function getPages(): int
     {
-        if (!$this->getRpp()) {
+        if ($this->getRpp() === 0) {
             throw new LogicException('Rpp was not set');
         }
 
-        if (!$this->getTotal()) {
+        if ($this->getTotal() === 0) {
             return 0;
         }
 
@@ -63,7 +63,7 @@ class PaginatedCollection implements Collection
 
     public function getFirstPage(): ?int
     {
-        if (0 == $this->getPages()) {
+        if (0 === $this->getPages()) {
             return null;
         }
 
@@ -72,7 +72,7 @@ class PaginatedCollection implements Collection
 
     public function getLastPage(): ?int
     {
-        if (0 == $this->getPages()) {
+        if (0 === $this->getPages()) {
             return null;
         }
 
@@ -104,7 +104,7 @@ class PaginatedCollection implements Collection
 
     public function isLastPage(): bool
     {
-        return !$this->getPages() || $this->getPage() == $this->getPages();
+        return !$this->getPages() || $this->getPage() === $this->getPages();
     }
 
     public function collapsedPages(int $elements = 5, bool $alwaysIncludeFirstAndLast = false): array
@@ -185,7 +185,7 @@ class PaginatedCollection implements Collection
     /**
      * @return true (do not typehint, as it would break the interface for doctrine/collection 1.8)
      */
-    public function add($element)
+    public function add($element): void
     {
         $this->results->add($element);
     }

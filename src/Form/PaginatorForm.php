@@ -28,7 +28,7 @@ class PaginatorForm extends FiltersForm implements PaginatorFormInterface
             'order_direction_default_value' => 'asc',
         ]);
 
-        $resolver->setNormalizer('rpp_valid_values', function (Options $options, $value) {
+        $resolver->setNormalizer('rpp_valid_values', function (Options $options, array $value): array {
             foreach ($value as $i => $v) {
                 $value[$i] = "$v";
             }
@@ -36,7 +36,7 @@ class PaginatorForm extends FiltersForm implements PaginatorFormInterface
             return $value;
         });
 
-        $resolver->setNormalizer('rpp_default_value', function (Options $options, $value) {
+        $resolver->setNormalizer('rpp_default_value', function (Options $options, $value): string {
             return "$value";
         });
     }
