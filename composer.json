@@ -1,26 +1,26 @@
 {
     "name": "softspring/doctrine-paginator",
     "description": "This library provides a paginator for doctrine query builder",
-    "type": "library",
     "license": "AGPL-3.0-or-later",
-    "minimum-stability": "dev",
-    "prefer-stable": true,
+    "type": "library",
     "require": {
         "php": ">=8.4",
-        "doctrine/orm": "^2.11 | ^3.0",
-        "doctrine/collections": "^1.8 | ^2.0 | ^3.0",
+        "doctrine/collections": "^1.8 || ^2.0 || ^3.0",
+        "doctrine/orm": "^2.10 || ^3.0 || ^4.0",
         "softspring/doctrine-query-filters": "^6.0@dev",
-        "symfony/http-foundation": "^6.4|^7.4|^8.0",
-        "symfony/form": "^6.4|^7.4|^8.0",
-        "symfony/validator": "^6.4|^7.4|^8.0",
-        "symfony/routing": "^6.4|^7.4|^8.0"
+        "symfony/form": "^6.4 || ^7.4 || ^8.0",
+        "symfony/http-foundation": "^6.4 || ^7.4 || ^8.0",
+        "symfony/routing": "^6.4 || ^7.4 || ^8.0",
+        "symfony/validator": "^6.4 || ^7.4 || ^8.0"
     },
     "require-dev": {
         "ergebnis/composer-normalize": "^2.50",
-        "friendsofphp/php-cs-fixer": "^3.89",
+        "friendsofphp/php-cs-fixer": "^3.94",
         "phpstan/phpstan": "^2.1",
-        "rector/rector": "^2.2"
+        "rector/rector": "^2.3"
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "Softspring\\Component\\DoctrinePaginator\\": "src/"
@@ -32,18 +32,23 @@
         }
     },
     "config": {
-        "sort-packages": true,
         "allow-plugins": {
             "ergebnis/composer-normalize": true
+        },
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-6.0": "6.0.x-dev"
         }
     },
     "scripts": {
         "fix": [
             "vendor/bin/rector process src tests",
-            "vendor/bin/php-cs-fixer fix --diff",
+            "vendor/bin/php-cs-fixer fix",
             "composer normalize"
         ],
-        "run-tests" : [
+        "run-tests": [
             "composer validate --strict --no-check-lock --ansi",
             "XDEBUG_MODE=coverage vendor/bin/phpunit",
             "vendor/bin/rector process src tests --dry-run",
