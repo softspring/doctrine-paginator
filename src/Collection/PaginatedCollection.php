@@ -4,7 +4,7 @@ namespace Softspring\Component\DoctrinePaginator\Collection;
 
 use Closure;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\Common\Collections\ReadableCollection;
+use Doctrine\Common\Collections\Criteria;
 use Exception;
 use LogicException;
 use Softspring\Component\DoctrinePaginator\Utils\Collapser;
@@ -50,11 +50,11 @@ class PaginatedCollection implements Collection
 
     public function getPages(): int
     {
-        if ($this->getRpp() === 0) {
+        if (0 === $this->getRpp()) {
             throw new LogicException('Rpp was not set');
         }
 
-        if ($this->getTotal() === 0) {
+        if (0 === $this->getTotal()) {
             return 0;
         }
 
@@ -132,9 +132,9 @@ class PaginatedCollection implements Collection
             $inverseOrder = $this->isSortedBy($orderField, 'asc') ? 'desc' : 'asc';
 
             return $this->getSortUrl($request, $orderField, $inverseOrder, $orderParameterName, $sortParameterName, $pageParameterName, $referenceType);
-        } else {
-            return $this->getSortUrl($request, $orderField, 'asc', $orderParameterName, $sortParameterName, $pageParameterName, $referenceType);
         }
+
+        return $this->getSortUrl($request, $orderField, 'asc', $orderParameterName, $sortParameterName, $pageParameterName, $referenceType);
     }
 
     public function getSortUrl(Request $request, string $orderField, string $sortDirection, string $orderParameterName = 'order', string $sortParameterName = 'sort', string $pageParameterName = 'page', int $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH): string
@@ -182,9 +182,6 @@ class PaginatedCollection implements Collection
      * IMPLEMENT DECORATED METHODS
      * **************************************************************************** */
 
-    /**
-     * @return true (do not typehint, as it would break the interface for doctrine/collection 1.8)
-     */
     public function add($element): void
     {
         $this->results->add($element);
@@ -210,7 +207,7 @@ class PaginatedCollection implements Collection
         $this->results->set($key, $value);
     }
 
-    public function filter(Closure $p): ReadableCollection
+    public function filter(Closure $p): Collection
     {
         return $this->results->filter($p);
     }
@@ -320,9 +317,17 @@ class PaginatedCollection implements Collection
         return $this->results->exists($p);
     }
 
-    public function map(Closure $func): ReadableCollection
+    public function map(Closure $func): Collection
     {
         return $this->results->map($func);
+    }
+
+    public function matching(Criteria $criteria): Collection
+    {
+        /** @var Collection $collection */
+        $collection = $this->results->matching($criteria);
+
+        return $collection;
     }
 
     public function forAll(Closure $p): bool
@@ -330,7 +335,7 @@ class PaginatedCollection implements Collection
         return $this->results->forAll($p);
     }
 
-    public function indexOf($element): int|string|bool
+    public function indexOf($element): int|string|false
     {
         return $this->results->indexOf($element);
     }
@@ -340,11 +345,15 @@ class PaginatedCollection implements Collection
      */
     public function findFirst(Closure $p): mixed
     {
-        if (!method_exists(ReadableCollection::class, 'findFirst')) {
-            throw new Exception('This findFirst method is only available with doctrine/collections >= 2.0, witch is only compatible with PHP >= 8.1');
+        // This method exists only in doctrine/collections >= 2.0
+        if (!method_exists($this->results, 'findFirst')) {
+            throw new Exception('findFirst() requires doctrine/collections >= 2.0');
         }
 
-        return $this->results->findFirst($p);
+        /** @var callable $callable */
+        $callable = [$this->results, 'findFirst'];
+
+        return $callable($p);
     }
 
     /**
@@ -352,10 +361,14 @@ class PaginatedCollection implements Collection
      */
     public function reduce(Closure $func, mixed $initial = null): mixed
     {
-        if (!method_exists(ReadableCollection::class, 'reduce')) {
-            throw new Exception('This reduce method is only available with doctrine/collections >= 2.0, witch is only compatible with PHP >= 8.1');
+        // This method exists only in doctrine/collections >= 2.0
+        if (!method_exists($this->results, 'reduce')) {
+            throw new Exception('reduce() requires doctrine/collections >= 2.0');
         }
 
-        return $this->results->reduce($func, $initial);
+        /** @var callable $callable */
+        $callable = [$this->results, 'reduce'];
+
+        return $callable($func, $initial);
     }
 }

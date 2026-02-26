@@ -51,7 +51,7 @@ class Paginator
         $countQb->select('COUNT('.$countQb->getAllAliases()[0].')');
         $total = (int) $countQb->getQuery()->getSingleScalarResult();
 
-        if ($total !== 0) {
+        if (0 !== $total) {
             $pageQb = clone $qb;
             $pageQb->setFirstResult(($page - 1) * $rpp);
             $pageQb->setMaxResults($rpp);
@@ -74,7 +74,7 @@ class Paginator
 
         $formCompiledOptions = $form->getConfig()->getOptions();
 
-        $page = $request->get($formCompiledOptions['page_field_name'], 1);
+        $page = $request->request->get($formCompiledOptions['page_field_name'], $request->query->get($formCompiledOptions['page_field_name'], 1));
 
         $rpp = $form->get($formCompiledOptions['rpp_field_name'])->getData() ?? $formCompiledOptions['rpp_default_value'];
         if (!in_array($rpp, $formCompiledOptions['rpp_valid_values'])) {
