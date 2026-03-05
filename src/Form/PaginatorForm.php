@@ -47,17 +47,17 @@ class PaginatorForm extends FiltersForm implements PaginatorFormInterface
 
         $builder->add($options['rpp_field_name'], HiddenType::class, [
             'mapped' => false,
-            'constraints' => new Choice([], $options['rpp_valid_values']),
+            'constraints' => new Choice(null, $options['rpp_valid_values']),
         ]);
 
         $builder->add($options['order_field_name'], HiddenType::class, [
             'mapped' => false,
-            'constraints' => new Choice([], $options['order_valid_fields']),
+            'constraints' => new Choice(null, $options['order_valid_fields']),
         ]);
 
         $builder->add($options['order_direction_field_name'], HiddenType::class, [
             'mapped' => false,
-            'constraints' => new Choice([], $options['order_direction_valid_fields']),
+            'constraints' => new Choice(null, $options['order_direction_valid_fields']),
         ]);
     }
 }
