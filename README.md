@@ -1,4 +1,4 @@
-# Doctrine paginator component
+# Doctrine Paginator
 
 ![Latest Stable](https://img.shields.io/packagist/v/softspring/doctrine-paginator?label=stable&style=flat-square)
 ![Latest Unstable](https://img.shields.io/packagist/v/softspring/doctrine-paginator?label=unstable&style=flat-square&include_prereleases)
@@ -7,19 +7,28 @@
 ![Downloads](https://img.shields.io/packagist/dt/softspring/doctrine-paginator?style=flat-square)
 [![CI](https://img.shields.io/github/actions/workflow/status/softspring/doctrine-paginator/ci.yml?branch=6.0&style=flat-square&label=CI)](https://github.com/softspring/doctrine-paginator/actions/workflows/ci.yml)
 
-Provides a simple powerful doctrine paginator.
+This library provides a paginator for doctrine query builder
+
+## Armonic
+
+This package is part of [Armonic](https://softspring.es/en/armonic).
 
 ## Documentation
 
-* [1. Installation](docs/1_installation.md)
-* [2. Concepts](docs/2_concepts.md)
-* [3. Query page](docs/3_query_page.md)
-* [4. Paginated collection](docs/4_paginated_collection.md)
-* [5. Twig usage](docs/5_twig_usage.md)
-* [6. Paginator form](docs/6_paginator_form.md)
+[Armonic Documentation](https://armonic.softspring.es/latest/components/doctrine-paginator)
+
+## Contributing
+
+Use the standard package commands before sending changes:
+
+```bash
+composer fix
+composer test
+composer test-bc
+```
+
+[Report issues](https://github.com/softspring/doctrine-paginator/issues) and [send Pull Requests](https://github.com/softspring/doctrine-paginator/pulls)
 
 ## License
 
 This package is free and released under the [AGPL-3.0 license](LICENSE).
-
-
