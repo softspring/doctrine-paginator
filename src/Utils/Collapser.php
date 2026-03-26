@@ -10,6 +10,11 @@ class Collapser
     {
         $current = $collection->getPage();
         $pages = $collection->getPages();
+
+        if (0 === $pages) {
+            return [];
+        }
+
         $pagesArray = range(1, $pages);
 
         if ($elements < 5 || $pages <= $elements) {
