@@ -5,7 +5,6 @@ namespace Softspring\Component\DoctrinePaginator\Tests\Form;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
-use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\TestCase;
 use Softspring\Component\DoctrinePaginator\Form\PaginatorForm;
 use Softspring\Component\DoctrinePaginator\Paginator;
@@ -19,7 +18,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Validation;
 
-#[AllowMockObjectsWithoutExpectations]
 class PaginatorFormTest extends TestCase
 {
     public function testPaginatorFormDefaultsAndFields(): void
