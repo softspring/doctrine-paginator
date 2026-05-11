@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Softspring\Component\DoctrinePaginator\Tests\Collection;
 
 use Doctrine\Common\Collections\ArrayCollection;
