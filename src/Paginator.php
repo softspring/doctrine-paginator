@@ -23,6 +23,7 @@ class Paginator
         $aggregateQb = clone $qb;
         Filters::apply($aggregateQb, $filters, $filtersMode);
 
+        $aggregateQb->resetDQLPart('orderBy');
         $aggregateQb->resetDQLPart('select');
         foreach ($aggregates as $alias => $aggregate) {
             if (is_string($alias)) {
@@ -49,6 +50,7 @@ class Paginator
         $countQb = clone $qb;
         Filters::apply($countQb, $filters, $filtersMode);
         $countQb->select('COUNT('.$countQb->getAllAliases()[0].')');
+        $countQb->resetDQLPart('orderBy');
         $total = (int) $countQb->getQuery()->getSingleScalarResult();
 
         if (0 !== $total) {
@@ -74,7 +76,11 @@ class Paginator
 
         $formCompiledOptions = $form->getConfig()->getOptions();
 
-        $page = $request->request->get($formCompiledOptions['page_field_name'], $request->query->get($formCompiledOptions['page_field_name'], 1));
+        if ('POST' === $form->getConfig()->getMethod()) {
+            $page = $request->request->get($formCompiledOptions['page_field_name'], 1);
+        } else {
+            $page = $request->query->get($formCompiledOptions['page_field_name'], 1);
+        }
 
         $rpp = $form->get($formCompiledOptions['rpp_field_name'])->getData() ?? $formCompiledOptions['rpp_default_value'];
         if (!in_array($rpp, $formCompiledOptions['rpp_valid_values'])) {
