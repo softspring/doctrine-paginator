@@ -25,4 +25,34 @@ class CollapserTest extends TestCase
         self::assertSame([null, 4, 5, 6, null], Collapser::collapse($collection, 5, false));
         self::assertSame([1, null, 5, null, 12], Collapser::collapse($collection, 5, true));
     }
+
+    public function testReturnsAllPagesWhenPageCountFitsRequestedElements(): void
+    {
+        $collection = new PaginatedCollection(new ArrayCollection(['a']), 2, 10, 30);
+
+        self::assertSame([1, 2, 3], Collapser::collapse($collection, 5));
+    }
+
+    public function testReturnsAllPagesWhenRequestedElementsIsLessThanMinimumCollapseSize(): void
+    {
+        $collection = new PaginatedCollection(new ArrayCollection(['a']), 5, 10, 120);
+
+        self::assertSame(range(1, 12), Collapser::collapse($collection, 4));
+    }
+
+    public function testCollapsesNearFirstPage(): void
+    {
+        $collection = new PaginatedCollection(new ArrayCollection(['a']), 1, 10, 120);
+
+        self::assertSame([1, 2, 3, 4, null], Collapser::collapse($collection, 5, false));
+        self::assertSame([1, 2, 3, null, 12], Collapser::collapse($collection, 5, true));
+    }
+
+    public function testCollapsesNearLastPage(): void
+    {
+        $collection = new PaginatedCollection(new ArrayCollection(['a']), 12, 10, 120);
+
+        self::assertSame([null, 9, 10, 11, 12], Collapser::collapse($collection, 5, false));
+        self::assertSame([1, null, 10, 11, 12], Collapser::collapse($collection, 5, true));
+    }
 }
