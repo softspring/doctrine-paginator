@@ -132,9 +132,9 @@ class PaginatedCollection implements Collection
             $inverseOrder = $this->isSortedBy($orderField, 'asc') ? 'desc' : 'asc';
 
             return $this->getSortUrl($request, $orderField, $inverseOrder, $orderParameterName, $sortParameterName, $pageParameterName, $referenceType);
-        } else {
-            return $this->getSortUrl($request, $orderField, 'asc', $orderParameterName, $sortParameterName, $pageParameterName, $referenceType);
         }
+
+        return $this->getSortUrl($request, $orderField, 'asc', $orderParameterName, $sortParameterName, $pageParameterName, $referenceType);
     }
 
     public function getSortUrl(Request $request, string $orderField, string $sortDirection, string $orderParameterName = 'order', string $sortParameterName = 'sort', string $pageParameterName = 'page', int $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH): string
