@@ -7,7 +7,7 @@
         "php": ">=8.4",
         "doctrine/collections": "^1.8 || ^2.0 || ^3.0",
         "doctrine/orm": "^2.10 || ^3.0 || ^4.0",
-        "softspring/doctrine-query-filters": "^6.0@dev",
+        "softspring/doctrine-query-filters": "6.1.*@dev",
         "symfony/form": "^6.4 || ^7.4 || ^8.0",
         "symfony/http-foundation": "^6.4 || ^7.4 || ^8.0",
         "symfony/routing": "^6.4 || ^7.4 || ^8.0",
@@ -42,7 +42,8 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-6.0": "6.0.x-dev"
+            "dev-6.0": "6.0.x-dev",
+            "dev-6.1": "6.1.x-dev"
         }
     },
     "scripts": {
